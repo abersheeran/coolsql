@@ -1,7 +1,6 @@
 import pytest
 
-from coolsql import Field, Case
-
+from coolsql import Case, Field
 
 field_name = Field("name")
 field_age = Field("age")
@@ -16,6 +15,11 @@ field_age = Field("age")
         (
             field_name.isnull() & field_age.between(18, 24),
             '(("name" IS NULL) AND ("age" BETWEEN 18 AND 24))',
+            [],
+        ),
+        (
+            Case().when(1, 0).else_(1),
+            "CASE WHEN 1 THEN 0 ELSE 1 END",
             [],
         ),
     ],

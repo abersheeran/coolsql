@@ -1,5 +1,5 @@
+from .expressions import Case, ExprForStringMixin, ExprMixin
 from .field import Field as BaseField
-from .expressions import Case, ExprMixin, ExprForStringMixin
 
 __all__ = [
     "Case",
