@@ -1,6 +1,6 @@
 # CoolSQL
 
-![PyPI](https://img.shields.io/pypi/v/coolsql?style=flat-square)
+[![PyPI](https://img.shields.io/pypi/v/coolsql?style=flat-square)](https://pypi.org/project/coolsql)
 
 Makes it easier to write raw SQL in Python.
 
