@@ -2,31 +2,32 @@
 authors = ["abersheeran <me@abersheeran.com>"]
 description = ""
 license = "Apache-2.0"
-name = "setup.py" # TODO
+name = "coolsql"
 readme = "README.md"
 version = "0.1.0"
 
-homepage = "https://github.com/abersheeran/setup.py" # TODO
-repository = "https://github.com/abersheeran/setup.py" # TODO
+homepage = "https://github.com/abersheeran/coolsql"
+repository = "https://github.com/abersheeran/coolsql"
 
 classifiers = [
   "Programming Language :: Python :: 3",
 ]
 
 packages = [
-  {include = "example"}, # TODO
+  {include = "coolsql"},
 ]
 
 [tool.poetry.dependencies]
 python = "^3.7"
 
 [tool.poetry.dev-dependencies]
-black = {version = "*", allow-prereleases = true}
+black = "*"
 isort = "*"
 
 flake8 = "*"
 
-pytest = "^5.4.3"
+pytest = "*"
+pytest-cov = "^3.0.0"
 
 [tool.isort]
 profile = "black"

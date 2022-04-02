@@ -1,4 +1,4 @@
-from example.__version__ import VERSION, __version__  # TODO
+from coolsql.__version__ import VERSION, __version__
 
 
 def test_version():

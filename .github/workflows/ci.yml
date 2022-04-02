@@ -10,7 +10,7 @@ on:
       - ".github/workflows/ci.yml"
       - "**.py"
       - "poetry.lock"
-      - "!example/__version__.py" # TODO
+      - "!coolsql/__version__.py"
   pull_request:
     branches:
       - master
@@ -18,7 +18,7 @@ on:
       - ".github/workflows/ci.yml"
       - "**.py"
       - "poetry.lock"
-      - "!example/__version__.py" # TODO
+      - "!coolsql/__version__.py"
 
 jobs:
   tests:
@@ -26,8 +26,8 @@ jobs:
     runs-on: "${{ matrix.os }}"
     strategy:
       matrix:
-        python-version: [3.7, 3.8, 3.9]
-        os: [windows-latest, ubuntu-latest, macos-latest]
+        python-version: [3.7, 3.8, 3.9, "3.10"]
+        os: [ubuntu-latest]
 
     steps:
       - uses: actions/checkout@v1
@@ -50,7 +50,7 @@ jobs:
           python script/check.py
       - name: Test with pytest
         run: |
-          pytest -o log_cli=true -o log_cli_level=DEBUG
+          pytest tests --cov=coolsql -vv
 
   publish:
     needs: tests

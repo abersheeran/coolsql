@@ -1,9 +1,10 @@
 import os
+import subprocess
 from pathlib import Path
 
 here = Path(__file__).absolute().parent.parent
 
-package_name = "example"  # TODO Custom package name
+package_name = "coolsql"
 
 
 def get_version(package: str = package_name) -> str:
@@ -17,7 +18,9 @@ def get_version(package: str = package_name) -> str:
 
 os.chdir(here)
 subprocess.check_call(f"poetry version {get_version()}", shell=True)
-subprocess.check_call("git add indexpy/__version__.py pyproject.toml", shell=True)
+subprocess.check_call(
+    f"git add {package_name}/__version__.py pyproject.toml", shell=True
+)
 subprocess.check_call(f'git commit -m "{get_version()}"', shell=True)
 subprocess.check_call("git push", shell=True)
 subprocess.check_call("git tag v{0}".format(get_version()), shell=True)
