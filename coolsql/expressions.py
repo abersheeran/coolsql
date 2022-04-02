@@ -147,8 +147,8 @@ class Expr:
     def __format__(self, __format_spec: str) -> str:
         return self.compile(__format_spec)[0]
 
-    def parameters(self, placeholder: str = "?") -> List[Any]:
-        return self.compile(placeholder)[1]
+    def parameters(self) -> List[Any]:
+        return self.compile()[1]
 
     p = parameters  # shortcut
 

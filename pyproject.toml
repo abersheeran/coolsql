@@ -1,6 +1,6 @@
 [tool.poetry]
 authors = ["abersheeran <me@abersheeran.com>"]
-description = ""
+description = "Makes it easier to write raw SQL in Python."
 license = "Apache-2.0"
 name = "coolsql"
 readme = "README.md"

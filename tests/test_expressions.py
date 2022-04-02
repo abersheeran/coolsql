@@ -13,6 +13,11 @@ field_age = Field("age")
         (field_name.like("%a%"), '"name" LIKE ?', ["%a%"]),
         (field_name.isnull(), '"name" IS NULL', []),
         (
+            ~field_name.isnull() & field_name.like("%a%"),
+            '((NOT ("name" IS NULL)) AND ("name" LIKE ?))',
+            ["%a%"],
+        ),
+        (
             field_name.isnull() & field_age.between(18, 24),
             '(("name" IS NULL) AND ("age" BETWEEN 18 AND 24))',
             [],
