@@ -32,6 +32,23 @@ pytest-cov = "^3.0.0"
 [tool.isort]
 profile = "black"
 
+[tool.coverage.run]
+omit = ["*/.venv/*", "*/tests/*"]
+
+[tool.coverage.report]
+exclude_lines = [
+  "pragma: no cover",
+  "def __repr__",
+  "raise AssertionError",
+  "raise NotImplementedError",
+  "return NotImplemented",
+  "if False:",
+  "assert False",
+  "if TYPE_CHECKING:",
+]
+show_missing = true
+skip_covered = true
+
 [build-system]
-requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
+requires = ["poetry-core>=1.0.0"]

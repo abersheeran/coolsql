@@ -50,7 +50,7 @@ jobs:
           python script/check.py
       - name: Test with pytest
         run: |
-          pytest tests --cov=coolsql -vv
+          pytest tests -vv --cov=coolsql --cov-fail-under=100
 
   publish:
     needs: tests

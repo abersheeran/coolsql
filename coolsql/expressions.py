@@ -1,8 +1,9 @@
 from __future__ import annotations
 
-from typing import Any, List, Optional, Tuple
+from typing import TYPE_CHECKING, Any, List, Optional, Tuple
 
-from .field import Field
+if TYPE_CHECKING:
+    from .field import Field
 
 
 class ExprMixin:
@@ -175,7 +176,7 @@ class Expr:
         """
         if not isinstance(other, Expr):
             return NotImplemented
-        return ExprCombine("AND", other, self)
+        return ExprCombine("AND", other, self)  # pragma: no cover
 
     def __or__(self, other):
         """
@@ -191,7 +192,7 @@ class Expr:
         """
         if not isinstance(other, Expr):
             return NotImplemented
-        return ExprCombine("OR", other, self)
+        return ExprCombine("OR", other, self)  # pragma: no cover
 
 
 class NotExpr(Expr):
@@ -221,10 +222,7 @@ class ExprCombine(Expr):
             s, p = expr.compile(placeholder=placeholder)
             parameters.extend(p)
             sql_formats.append("(" + s + ")")
-        return (
-            "(" + " {} ".format(self.operator).join(sql_formats) + ")",
-            parameters,
-        )
+        return f" {self.operator} ".join(sql_formats), parameters
 
 
 class CompareExpr(Expr):
@@ -279,7 +277,11 @@ class ArithmeticExpr(ExprMixin, Expr):
 
     def compile(self, placeholder="?"):
         left_format, left_paramaters = compile_value(self.left, placeholder)
+        if isinstance(self.left, Expr):
+            left_format = "(" + left_format + ")"
         right_format, right_paramaters = compile_value(self.right, placeholder)
+        if isinstance(self.right, Expr):
+            right_format = "(" + right_format + ")"
         return (
             "{} {} {}".format(left_format, self.operator, right_format),
             left_paramaters + right_paramaters,
@@ -319,7 +321,7 @@ class _CaseEnd(Expr):
 
         if self._field is not None:
             return (
-                "CASE {} {} END".format(f'"{self._field}"', " ".join(sql_formats)),
+                "CASE {} {} END".format(self._field, " ".join(sql_formats)),
                 parameters,
             )
         else:
