@@ -12,9 +12,14 @@ Makes it easier to write raw SQL in Python.
 from coolsql import Field
 
 name = Field("name")
+age = Field("age")
 
-condition = name.isnull() & field_age.between(18, 24)
+condition = name.isnull() & age.between(18, 24)
 ...
 cursor.execute(f"SELECT * FROM table WHERE {condition}", condition.p())
 ...
 ```
+
+---
+
+Documentation is in progress, you can start by looking at the test cases under [tests](https://github.com/abersheeran/coolsql/blob/master/tests/test_expressions.py).
