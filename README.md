@@ -13,7 +13,7 @@ from coolsql import Field
 
 score = Field("score")
 
-condition = score >= 60 & (score * score / 100) >= 60
+condition = (score >= 60) & ((score * score / 100) >= 60)
 ...
 cursor.execute(f"SELECT * FROM table WHERE {condition}", condition.p())
 ...
