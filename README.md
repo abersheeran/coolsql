@@ -11,10 +11,9 @@ Makes it easier to write raw SQL in Python.
 ```python
 from coolsql import Field
 
-name = Field("name")
-age = Field("age")
+score = Field("score")
 
-condition = name.isnull() & age.between(18, 24)
+condition = score >= 60 & (score * score / 100) >= 60
 ...
 cursor.execute(f"SELECT * FROM table WHERE {condition}", condition.p())
 ...
